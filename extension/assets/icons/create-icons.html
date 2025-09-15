@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Icon Generator</title>
+</head>
+
+<body>
+    <canvas id="canvas16" width="16" height="16"></canvas>
+    <canvas id="canvas32" width="32" height="32"></canvas>
+    <canvas id="canvas48" width="48" height="48"></canvas>
+    <canvas id="canvas128" width="128" height="128"></canvas>
+
+    <script>
+        function createIcon(canvasId, size) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#8b5cf6');
+            gradient.addColorStop(1, '#3b82f6');
+
+            // Draw background circle
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, size / 2 - 2, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Draw border
+            ctx.strokeStyle = '#1f2937';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Draw letter L
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size * 0.4}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('L', size / 2, size / 2);
+
+            // Draw small dots
+            const dotSize = Math.max(1, size / 32);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            const positions = [
+                [size * 0.3, size * 0.3],
+                [size * 0.7, size * 0.3],
+                [size * 0.3, size * 0.7],
+                [size * 0.7, size * 0.7]
+            ];
+
+            positions.forEach(([x, y]) => {
+                ctx.beginPath();
+                ctx.arc(x, y, dotSize, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+
+            // Convert to blob and download
+            canvas.toBlob(function (blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `icon-${size}.png`;
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        // Create all icons
+        setTimeout(() => {
+            createIcon('canvas16', 16);
+            setTimeout(() => createIcon('canvas32', 32), 100);
+            setTimeout(() => createIcon('canvas48', 48), 200);
+            setTimeout(() => createIcon('canvas128', 128), 300);
+        }, 100);
+    </script>
+</body>
+
+</html>

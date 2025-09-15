@@ -1,0 +1,5 @@
+{
+  "name": "Link Formatter",
+  "description": "A simple tool to reformat markdown-style links into a specific ticket format. Paste your list, click format, and copy the result.",
+  "requestFramePermissions": []
+}

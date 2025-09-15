@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Ticket Link Formatter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .info h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .info p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .code {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">🔗</div>
+        <h1>Linear Ticket Link Formatter</h1>
+        <p class="subtitle">Chrome Extension for Formatting Linear Ticket Links</p>
+
+        <div class="info">
+            <h3>📦 Installation</h3>
+            <p>This is a Chrome extension that formats Linear ticket links into organized markdown lists.</p>
+            
+            <p><strong>To install:</strong></p>
+            <div class="code">
+1. Download the extension from GitHub Releases
+2. Open Chrome → chrome://extensions/
+3. Enable "Developer mode"
+4. Click "Load unpacked" → Select extension folder
+            </div>
+        </div>
+
+        <div class="info">
+            <h3>✨ Features</h3>
+            <p>• Auto-format Linear ticket links with one click</p>
+            <p>• Right-click context menu for quick access</p>
+            <p>• Keyboard shortcuts (Ctrl+Shift+L, Ctrl+Shift+F)</p>
+            <p>• Automatic categorization by type (Bug, Improvement, Normal)</p>
+            <p>• Privacy-focused - no data collection</p>
+        </div>
+
+        <div class="footer">
+            <p>Made with ❤️ for Linear users</p>
+            <p>Visit the <a href="https://github.com/tung-elfie/format-linear-tickets-link">GitHub repository</a> for downloads and documentation</p>
+        </div>
+    </div>
+</body>
+</html>
