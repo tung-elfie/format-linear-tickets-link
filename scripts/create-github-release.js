@@ -16,7 +16,6 @@ const files = [
   "chrome-store-package.zip",
   "linear-formatter-extension.crx",
   "linear-formatter-extension.zip",
-  "extension-installer.html",
   "PRIVACY_POLICY.md",
   "CHROME_STORE_GUIDE.md",
 ];
@@ -62,7 +61,6 @@ Transform your Linear ticket links into organized markdown lists with automatic 
 5. Click "Load unpacked" → Select extracted folder
 
 ### 📖 Documentation
-- [Installation Guide](extension-installer.html)
 - [Privacy Policy](PRIVACY_POLICY.md)
 - [Chrome Store Guide](CHROME_STORE_GUIDE.md)
 

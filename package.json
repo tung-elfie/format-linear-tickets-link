@@ -18,9 +18,7 @@
     "deploy:quick": "./quick-deploy.sh",
     "create-crx": "node scripts/create-crx.js",
     "prepare-release": "node scripts/create-github-release.js",
-    "distribute": "npm run build:extension && npm run create-crx && npm run prepare-release",
-    "deploy:pages": "node scripts/deploy-github-pages.js && git add . && git commit -m 'Deploy extension installer to GitHub Pages' && git subtree push --prefix gh-pages-temp origin gh-pages",
-    "deploy:pages:setup": "node scripts/deploy-github-pages.js"
+    "distribute": "npm run build:extension && npm run create-crx && npm run prepare-release"
   },
   "dependencies": {
     "react": "^19.1.1",
