@@ -5,15 +5,15 @@ const CopyIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    fill="currentColor"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className={className || 'w-6 h-6'}
   >
-    <path d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875h-8.25V3.375z" />
-    <path
-      fillRule="evenodd"
-      d="M11.03 8.25h-3.9a.75.75 0 00-.75.75v11.25a.75.75 0 00.75.75h10.5a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75h-3.9v-.75a2.25 2.25 0 00-2.25-2.25h-.375a2.25 2.25 0 00-2.25 2.25v.75zM12 1.5a5.25 5.25 0 00-5.25 5.25v1.875c0 .414.336.75.75.75h10.5a.75.75 0 00.75-.75V6.75A5.25 5.25 0 0012 1.5h-.375z"
-      clipRule="evenodd"
-    />
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
   </svg>
 );
 
@@ -38,7 +38,7 @@ const defaultInput = `- [ELF-18995: \\[Bug\\] \\[OBD5\\]: Missing progress statu
 - [ELF-18937: \\[Bug\\]\\[OBD5\\] Medications - The name of medications seem near the screen borders](https://linear.app/elfie/issue/ELF-18937/bugobd5-medications-the-name-of-medications-seem-near-the-screen)
 - [ELF-18913: \\[Improvement\\] \\[Women Health v2\\] Remove the word "My" on Detail page and Home screen](https://linear.app/elfie/issue/ELF-18913/improvement-women-health-v2-remove-the-word-my-on-detail-page-and-home)
 - [ELF-18883: \\[Bug\\]\\[Obd5\\]: The number should not overlap Elfie logo](https://linear.app/elfie/issue/ELF-18883/bugobd5-the-number-should-not-overlap-elfie-logo)
-- [ELF-18854: \\[Improvement\\] \\[Women Health v1\\] \\[Cycle history - detail page\\] Add in YYYY](https://linear.app/elfie/issue/ELF-18854/improvement-women-health-v1-cycle-history-detail-page-add-in-yyyy)
+[ELF-18854: \\[Improvement\\] \\[Women Health v1\\] \\[Cycle history - detail page\\] Add in YYYY](https://linear.app/elfie/issue/ELF-18854/improvement-women-health-v1-cycle-history-detail-page-add-in-yyyy)
 - [ELF-18853: \\[Onboarding 5.0\\] Empty state for Home plan](https://linear.app/elfie/issue/ELF-18853/onboarding-50-empty-state-for-home-plan)
 - [ELF-18764: \\[Onboarding 5.0\\] Pregnancy flow](https://linear.app/elfie/issue/ELF-18764/onboarding-50-pregnancy-flow)
 - [ELF-18109: \\[Improvement\\] \\[Sleep\\] Update intro screen title: Welcome to your sleep program](https://linear.app/elfie/issue/ELF-18109/improvement-sleep-update-intro-screen-title-welcome-to-your-sleep)
@@ -59,20 +59,22 @@ function App() {
 
     lines.forEach(line => {
       const trimmedLine = line.trim();
-      if (!trimmedLine.startsWith('- [')) {
+
+      // Check if line starts with "- [" or just "["
+      if (!trimmedLine.startsWith('- [') && !trimmedLine.startsWith('[')) {
         return; // Skip non-matching or empty lines
       }
-      
+
       const match = trimmedLine.match(/\[(.*?)]\(.*\)/);
-      
+
       if (match && match[1]) {
         const rawTitle = match[1];
-        
+
         // Un-escape brackets like \[ and \] for proper processing and output
         const cleanTitle = rawTitle.replace(/\\(\[|])/g, '$1');
 
-        // Replace the first colon after the ticket ID with a hyphen
-        const formattedTitle = cleanTitle.replace(/:\s/, '-');
+        // Keep the colon after the ticket ID (no replacement needed)
+        const formattedTitle = cleanTitle;
         const fullLine = `- ${formattedTitle}`;
 
         if (cleanTitle.toLowerCase().includes('[bug]')) {
@@ -84,18 +86,18 @@ function App() {
         }
       }
     });
-    
+
     const resultParts = [];
     if (normal.length > 0) {
       resultParts.push('Normal ticket:\n' + normal.join('\n'));
     }
     if (improvements.length > 0) {
-      resultParts.push('Improvement:\n' + improvements.join('\n'));
+      resultParts.push(':improvement: Improvement:\n' + improvements.join('\n'));
     }
     if (bugs.length > 0) {
-      resultParts.push('Bug:\n' + bugs.join('\n'));
+      resultParts.push(':ladybug: Bug fixed:\n' + bugs.join('\n'));
     }
-    
+
     setOutputText(resultParts.join('\n\n'));
   }, [inputText]);
 
@@ -107,7 +109,7 @@ function App() {
         setCopyButtonText('Copy');
       }, 2000);
     }).catch(err => {
-        console.error('Failed to copy text: ', err);
+      console.error('Failed to copy text: ', err);
     });
   }, [outputText]);
 
@@ -115,10 +117,10 @@ function App() {
     <div className="min-h-screen bg-gray-900 text-gray-200 font-sans flex flex-col items-center p-4 sm:p-8">
       <header className="w-full max-w-7xl text-center mb-4">
         <h3 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">
-          Format Linear Link 
+          Format Linear Link
         </h3>
       </header>
-      
+
       <main className="w-full max-w-7xl flex-grow flex flex-col items-center">
         <div className="w-full flex-grow flex flex-col lg:flex-row items-stretch lg:items-center gap-6">
           {/* Input Section */}
